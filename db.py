@@ -99,7 +99,7 @@ def db_delete_poem(author: str, title: str):  # Удаляет стихотво�
 def db_delete_poet(author: str):  # Удаляет автора и все его стихи из базы данных
     if author.lower().capitalize() in data.keys():
         if input(Back.WHITE + f'Вы уверены что хотите удалить "{author}" и все его стихи? [Y/N]') == 'Y':
-            db[author] = {}
+            del data[author.lower().capitalize()]
             db_push(data)
             message = f'"{author}" успешно удален'
             send_conclusion(message, True)
@@ -111,4 +111,4 @@ def db_delete_poet(author: str):  # Удаляет автора и все его
         send_conclusion(message, False)
 
 
-print(db_get_poets())
+db_delete_poet('ЕБАНЬКО')
