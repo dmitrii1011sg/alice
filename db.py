@@ -111,4 +111,5 @@ def db_delete_poet(author: str):  # Удаляет автора и все его
         send_conclusion(message, False)
 
 
-db_delete_poet('ЕБАНЬКО')
+
+
