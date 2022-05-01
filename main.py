@@ -46,8 +46,14 @@ def main():
     req = request.json  # request from Alice
 
     if req["session"]["new"]:   # session is new?
-        text = "Рада приветствовать Вас снова! Напомнить, что я умею?"
-        value = "start"
+        if 'new' in req['state']['user']:
+            text = "Рада видеть Вас снова! Напомнить, что я умею?"
+            value = "start"
+        else:
+            text = text = """1 Я могу прочитать Вам стих: достаточно сказать Алиса, прочти стихотворение
+                    2 Я могу помочь выучить стих, скажите Алиса, давай выучим стихотворение
+                    3 Так же Вы можете испытать свои знания в литературе, сказав Алиса, включи режим викторины"""
+            value = "tutorial_start"
 
     elif req["request"]["original_utterance"].lower() in ['выход', 'выключись']:    # exit
         end = True
