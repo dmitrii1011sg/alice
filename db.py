@@ -64,7 +64,8 @@ def db_get_poet(author: str) -> dict:  # Возвращает все стихо�
     if author.lower().capitalize() in data.keys():
         poems = dict()
         for key, value in data[author.lower().capitalize()].items():
-            if key == 'sys': continue
+            if key == 'sys':
+                continue
             poems[key] = value
         return poems
     else:
@@ -76,7 +77,8 @@ def db_get_poet(author: str) -> dict:  # Возвращает все стихо�
 def db_get_poets() -> list:  # Возвращает список всех авторов
     poets = list()
     for i in data.keys():
-        if i == 'sys': continue
+        if i == 'sys':
+            continue
         poets.append(i)
     return poets
 
@@ -109,7 +111,3 @@ def db_delete_poet(author: str):  # Удаляет автора и все его
     else:
         message = f'"{author}" нет в базе данных'
         send_conclusion(message, False)
-
-
-
-

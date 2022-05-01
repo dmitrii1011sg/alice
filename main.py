@@ -1,4 +1,5 @@
 from flask import Flask, request
+from config import *
 import logging
 import json
 
@@ -55,18 +56,18 @@ def main():
                     3 Так же Вы можете испытать свои знания в литературе, сказав Алиса, включи режим викторины"""
             value = "tutorial_start"
 
-    elif req["request"]["original_utterance"].lower() in ['выход', 'выключись']:    # exit
+    elif req["request"]["original_utterance"].lower() in stop_commands:    # exit
         end = True
         text = 'Пока брат'
 
     elif req["state"]["session"]["value"] == "start":   # if mode start
-        if req["request"]["original_utterance"].lower() in ['да', 'конечно', 'давай']:
+        if req["request"]["original_utterance"].lower() in agreement_commands:
             text = """1 Я могу прочитать Вам стих: достаточно сказать Алиса, прочти стихотворение
                     2 Я могу помочь выучить стих, скажите Алиса, давай выучим стихотворение
                     3 Так же Вы можете испытать свои знания в литературе, сказав Алиса, включи режим викторины"""
             value = "tutorial_start"
 
-        if req["request"]["original_utterance"].lower() in ['нет', 'не надо']:
+        if req["request"]["original_utterance"].lower() in disagreement_commands:
             text = """Что мы будем делать сегодня?
                         Читать или учить стих? А может опробуем нашу новую ф-ию викторины?"""
             value = "change_mode"
@@ -77,12 +78,12 @@ def main():
         value = "change_mode"
 
     elif req["state"]["session"]["value"] == "change_mode":
-        if req["request"]["original_utterance"].lower() in ['читать', 'читать стих', 'читать стихи']:
+        if req["request"]["original_utterance"].lower() in readPoem_commands:
             text = """Супер!
                         Какое стихотворение будем читать?"""
             value = "change_author_title_read"
 
-        if req["request"]["original_utterance"].lower() in ['учить', 'учить стих', 'учить стихи']:
+        if req["request"]["original_utterance"].lower() in learnPoem_commands:
             text = """Какое стихотворение вы бы хотели выучить? Назовите автора и название стих-я."""
             value = "change_author_title_learn"
 
